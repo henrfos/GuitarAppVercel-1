@@ -37,6 +37,11 @@ router.get('/:guitarId', ensureAuth, async function (req, res, next) {
 	res.json(guitar).status(200);
 });
 
+router.delete('/:id', ensureAuth, async function (req, res, next) {
+	await guitarService.delete(req.params.guitarId);
+	res.status(200).json({success: true, message: "guitar deleted successfully"})
+});
+
 /* POST new Guitar */
 router.post('/', ensureAuth, jsonParser, async function (req, res, next) {
 	let Year = req.body.year;
